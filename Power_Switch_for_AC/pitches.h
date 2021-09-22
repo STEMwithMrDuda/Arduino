@@ -1,5 +1,5 @@
 /*************************************************
- * Public Constants
+ * Public Constants - This can be found at https://www.arduino.cc/en/Tutorial/BuiltInExamples/toneMelody
  *************************************************/
 
 #define NOTE_B0  31

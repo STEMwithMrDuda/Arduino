@@ -1,6 +1,6 @@
 /*  Duda.AC.v1.1
 
-  This is a program to control a GE window air conditioning unit utlizing the build in pushbuttons 
+  This is a program to control a GE window air conditioning unit utlizing the built in pushbuttons 
   (connections scratched on the board to disconnect).  It will control power, compressor, and fan.
   Eventually it may integrate with thermostat.  For now it's ON or OFF.
   

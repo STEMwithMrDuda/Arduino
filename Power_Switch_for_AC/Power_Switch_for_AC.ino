@@ -124,7 +124,7 @@ statePowerButton = digitalRead(powerButton);
      tone(7, 800, 4); // plays a tone when the fan is high
   }
   else if (modeButtonCounter == 4) {
-    modeButtonCounter = 0;
+    modeButtonCounter = 1;
   }
 }
   

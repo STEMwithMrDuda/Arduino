@@ -62,30 +62,30 @@ void loop() {
   lastButtonState = statePowerButton;      // save the last state
   statePowerButton = digitalRead(powerButton); // read new state
 
-  if(lastButtonState == HIGH && statePowerButton == LOW) 
+if(lastButtonState == HIGH && statePowerButton == LOW) 
   {
-    stateCompressorPin = !stateCompressorPin;
-    powerState = !powerState;
-    digitalWrite(medSpeed, LOW);
-    digitalWrite(highSpeed, LOW);
-    digitalWrite(compressorPin, stateCompressorPin);
-    digitalWrite(lowSpeed, stateCompressorPin);
-    digitalWrite(powerState,powerState);
+  stateCompressorPin = !stateCompressorPin;
+  powerState = !powerState;
+  digitalWrite(medSpeed, LOW);
+  digitalWrite(highSpeed, LOW);
+  digitalWrite(compressorPin, stateCompressorPin);
+  digitalWrite(lowSpeed, stateCompressorPin);
+  digitalWrite(powerState,powerState);
   }
   
-  if(powerState == HIGH) {
+if(powerState == HIGH) {
   
-if(digitalRead(modeButton)==LOW && stateCompressorPin==HIGH)  //  Need to add something here to make sure the AC unit is on.
-  {newModeCount=modeButtonCounter+1;
-if(newModeCount!=modeButtonCounter) {
-  Serial.println(newModeCount);
-  switch (newModeCount) { 
-    case 1: digitalWrite(lowSpeed,HIGH), digitalWrite(medSpeed,LOW), digitalWrite(highSpeed,LOW); break;
-    case 2: digitalWrite(lowSpeed,LOW), digitalWrite(medSpeed,HIGH), digitalWrite(highSpeed,LOW); break;
-    case 3: digitalWrite(lowSpeed,LOW), digitalWrite(medSpeed,LOW), digitalWrite(highSpeed,HIGH); break;
-    default: digitalWrite(lowSpeed,HIGH); digitalWrite(medSpeed,LOW); digitalWrite(highSpeed,LOW);
-  newModeCount=0; break; }
-  modeButtonCounter=newModeCount; }
+  if(digitalRead(modeButton)==LOW && stateCompressorPin==HIGH)  //  Need to add something here to make sure the AC unit is on.
+    {newModeCount=modeButtonCounter+1;
+  if(newModeCount!=modeButtonCounter) {
+    Serial.println(newModeCount);
+    switch (newModeCount) { 
+      case 1: digitalWrite(lowSpeed,HIGH), digitalWrite(medSpeed,LOW), digitalWrite(highSpeed,LOW); break;
+      case 2: digitalWrite(lowSpeed,LOW), digitalWrite(medSpeed,HIGH), digitalWrite(highSpeed,LOW); break;
+      case 3: digitalWrite(lowSpeed,LOW), digitalWrite(medSpeed,LOW), digitalWrite(highSpeed,HIGH); break;
+      default: digitalWrite(lowSpeed,HIGH); digitalWrite(medSpeed,LOW); digitalWrite(highSpeed,LOW);
+    newModeCount=0; break; }
+    modeButtonCounter=newModeCount; }
 }
 
   delay(300);

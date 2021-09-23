@@ -52,7 +52,7 @@ void setup() {
       tone(8, shaveMelody[thisNote], shaveDuration);
       int pauseBetweenNotes = shaveDuration * 1.30;
       delay(pauseBetweenNotes);
-      noTone(8);
+      noTone(7);
     }
   }
 }

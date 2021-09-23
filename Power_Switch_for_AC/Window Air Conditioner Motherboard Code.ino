@@ -27,8 +27,6 @@ int stateCompressorPin = LOW;     // the current state of LED
 int stateFanPin = LOW;  //  Is the fan on or off?
 int lastButtonState;    // the previous state of button
 int statePowerButton; // the current state of button
-long time = 0;
-long debounce = 200;
 int modeButtonCounter = 0;   // counter for the number of button presses
 int powerState = LOW;
 int newModeCount;

@@ -55,7 +55,7 @@ void setup() {
     noTone(8);
   }
 }
-
+}
 void loop() {
   lastButtonState = statePowerButton;  // save the last state
   statePowerButton = digitalRead(powerButton);  // read new state

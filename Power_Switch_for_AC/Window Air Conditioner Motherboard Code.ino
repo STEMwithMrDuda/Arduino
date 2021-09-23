@@ -31,8 +31,6 @@ long time = 0;
 long debounce = 200;
 int modeButtonCounter = 0;   // counter for the number of button presses
 int powerState = LOW;
-
-
 int newModeCount;
 
 void setup() {
@@ -47,8 +45,8 @@ void setup() {
   pinMode(thermostatPin, INPUT);
   statePowerButton = LOW;
   
-  // plays music
-    {
+// plays music
+{
   for (int thisNote = 0; thisNote < 8; thisNote++) {
     int shaveDuration = 1000 / shaveDurations[thisNote];
     tone(8, shaveMelody[thisNote], shaveDuration);
@@ -59,9 +57,10 @@ void setup() {
 }
 
 void loop() {
-  lastButtonState = statePowerButton;      // save the last state
-  statePowerButton = digitalRead(powerButton); // read new state
+  lastButtonState = statePowerButton;  // save the last state
+  statePowerButton = digitalRead(powerButton);  // read new state
 
+// This section checks to see if the powerButton is pressed.  If so it turns the fan on LOW and turns on the compressor.
 if(lastButtonState == HIGH && statePowerButton == LOW) 
   {
   stateCompressorPin = !stateCompressorPin;
@@ -73,9 +72,9 @@ if(lastButtonState == HIGH && statePowerButton == LOW)
   digitalWrite(powerState,powerState);
   }
   
+//  This section controls the speed of the fan ONLY if powerState is HIGH
 if(powerState == HIGH) {
-  
-  if(digitalRead(modeButton)==LOW && stateCompressorPin==HIGH)  //  Need to add something here to make sure the AC unit is on.
+  if(digitalRead(modeButton)==LOW && stateCompressorPin==HIGH)  // Need to add something here to make sure the AC unit is on.
     {newModeCount=modeButtonCounter+1;
   if(newModeCount!=modeButtonCounter) {
     Serial.println(newModeCount);

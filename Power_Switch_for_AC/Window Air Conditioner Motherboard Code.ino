@@ -17,28 +17,28 @@ const int speakerPin = 7;  //  The piezo buzzer is connected to this
 const int compressorPin = 8;  //  This pin is connected to the relay the controls the compressor
 const int thermostatPin = 9;  //To be used in the future when I read the thermostate via serial.
 
-int shaveMelody[] = { NOTE_C4, NOTE_G3, NOTE_G3, NOTE_A3, NOTE_G3, 0, NOTE_B3, NOTE_C4 }; //Shave and a haircut melody
-int shaveDurations[] = { 4, 8, 8, 4, 4, 4, 4, 4 }; // Shave and a Haircut note length
-int zippityDuda[] = { NOTE_C4, NOTE_C4, NOTE_D4, NOTE_E4, NOTE_A5, NOTE_F4, NOTE_F4, NOTE_D4, NOTE_E4, NOTE_E4 };  //  Zippity Duda melody
-int zippityDurations[] = { 4, 8, 8, 4, 2, 4, 8, 8, 4, 2 }; //  Zippity Duda note length
+int shaveMelody[] = { NOTE_C4, NOTE_G3, NOTE_G3, NOTE_A3, NOTE_G3, 0, NOTE_B3, NOTE_C4 }; // Shave and a haircut melody
+int shaveDurations[] = { 4, 8, 8, 4, 4, 4, 4, 4 };  // Shave and a Haircut note length
+int zippityDuda[] = { NOTE_C4, NOTE_C4, NOTE_D4, NOTE_E4, NOTE_A5, NOTE_F4, NOTE_F4, NOTE_D4, NOTE_E4, NOTE_E4 };  // Zippity Duda melody
+int zippityDurations[] = { 4, 8, 8, 4, 2, 4, 8, 8, 4, 2 }; // Zippity Duda note length
 
 // variables will change:
-int stateCompressorPin = LOW;     // the current state of LED
+int stateCompressorPin = LOW;  // the current state of the compressor
 int stateFanPin = LOW;  //  Is the fan on or off?
-int lastButtonState;    // the previous state of button
+int lastButtonState;  // the previous state of button
 int statePowerButton; // the current state of button
-int modeButtonCounter = 0;   // counter for the number of button presses
+int modeButtonCounter = 0;  // counter for the number of button presses
 int powerState = LOW;
 int newModeCount;
 
 void setup() {
 
   pinMode(powerButton, INPUT_PULLUP); // set arduino pin to input pull-up mode
-  pinMode(compressorPin, OUTPUT);          // set arduino pin to output mode
+  pinMode(modeButton, INPUT_PULLUP);
+  pinMode(compressorPin, OUTPUT);  // set arduino pin to output mode
   pinMode(lowSpeed, OUTPUT);
   pinMode(medSpeed, OUTPUT);
   pinMode(highSpeed, OUTPUT);
-  pinMode(modeButton, INPUT_PULLUP);
   pinMode(speakerPin, OUTPUT);
   pinMode(thermostatPin, INPUT);
   statePowerButton = LOW;

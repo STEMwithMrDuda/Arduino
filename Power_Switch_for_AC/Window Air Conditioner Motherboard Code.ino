@@ -1,6 +1,6 @@
 /*  Duda.AC.v3.0
 
-  This is a program to control a GE window air conditioning unit utlizing the built in pushbuttons 
+  This is a program to control a GE window air conditioning unit utlizing the built in pushbuttons
   (connections scratched on the board to disconnect).  It will control power, compressor, and fan.
   Eventually it may integrate with thermostat.  For now it's ON or OFF.
 
@@ -8,7 +8,7 @@
 
 #include "pitches.h"
 // constants won't change. They're used here to set pin numbers:
-const int powerButton = 1; 
+const int powerButton = 1;
 const int modeButton = 3;  // can choose the fan speed
 const int lowSpeed = 4;  //  Turns the fan on low
 const int medSpeed = 5;  //  Turns the fan on medium
@@ -44,48 +44,51 @@ void setup() {
   pinMode(speakerPin, OUTPUT);
   pinMode(thermostatPin, INPUT);
   statePowerButton = LOW;
-  
-// plays music
-{
-  for (int thisNote = 0; thisNote < 8; thisNote++) {
-    int shaveDuration = 1000 / shaveDurations[thisNote];
-    tone(8, shaveMelody[thisNote], shaveDuration);
-    int pauseBetweenNotes = shaveDuration * 1.30;
-    delay(pauseBetweenNotes);
-    noTone(8);
+
+  // plays music
+  {
+    for (int thisNote = 0; thisNote < 8; thisNote++) {
+      int shaveDuration = 1000 / shaveDurations[thisNote];
+      tone(8, shaveMelody[thisNote], shaveDuration);
+      int pauseBetweenNotes = shaveDuration * 1.30;
+      delay(pauseBetweenNotes);
+      noTone(8);
+    }
   }
-}
 }
 void loop() {
   lastButtonState = statePowerButton;  // save the last state
   statePowerButton = digitalRead(powerButton);  // read new state
 
-// This section checks to see if the powerButton is pressed.  If so it turns the fan on LOW and turns on the compressor.
-if(lastButtonState == HIGH && statePowerButton == LOW) 
+  // This section checks to see if the powerButton is pressed.  If so it turns the fan on LOW and turns on the compressor.
+  if (lastButtonState == HIGH && statePowerButton == LOW)
   {
-  stateCompressorPin = !stateCompressorPin;
-  powerState = !powerState;
-  digitalWrite(medSpeed, LOW);
-  digitalWrite(highSpeed, LOW);
-  digitalWrite(compressorPin, stateCompressorPin);
-  digitalWrite(lowSpeed, stateCompressorPin);
-  digitalWrite(powerState,powerState);
+    stateCompressorPin = !stateCompressorPin;
+    powerState = !powerState;
+    digitalWrite(medSpeed, LOW);
+    digitalWrite(highSpeed, LOW);
+    digitalWrite(compressorPin, stateCompressorPin);
+    digitalWrite(lowSpeed, stateCompressorPin);
+    digitalWrite(powerState, powerState);
   }
-  
-//  This section controls the speed of the fan ONLY if powerState is HIGH
-if(powerState == HIGH) {
-  if(digitalRead(modeButton)==LOW && stateCompressorPin==HIGH)  // Need to add something here to make sure the AC unit is on.
-    {newModeCount=modeButtonCounter+1;
-  if(newModeCount!=modeButtonCounter) {
-    Serial.println(newModeCount);
-    switch (newModeCount) { 
-      case 1: digitalWrite(lowSpeed,HIGH), digitalWrite(medSpeed,LOW), digitalWrite(highSpeed,LOW); break;
-      case 2: digitalWrite(lowSpeed,LOW), digitalWrite(medSpeed,HIGH), digitalWrite(highSpeed,LOW); break;
-      case 3: digitalWrite(lowSpeed,LOW), digitalWrite(medSpeed,LOW), digitalWrite(highSpeed,HIGH); break;
-      default: digitalWrite(lowSpeed,HIGH); digitalWrite(medSpeed,LOW); digitalWrite(highSpeed,LOW);
-    newModeCount=0; break; }
-    modeButtonCounter=newModeCount; }
-}
 
-  delay(300);
-  }}
+  //  This section controls the speed of the fan ONLY if powerState is HIGH
+  if (powerState == HIGH) {
+    if (digitalRead(modeButton) == LOW && stateCompressorPin == HIGH) // Need to add something here to make sure the AC unit is on.
+    { newModeCount = modeButtonCounter + 1;
+      if (newModeCount != modeButtonCounter) {
+        Serial.println(newModeCount);
+        switch (newModeCount) {
+          case 1: digitalWrite(lowSpeed, HIGH), digitalWrite(medSpeed, LOW), digitalWrite(highSpeed, LOW); break;
+          case 2: digitalWrite(lowSpeed, LOW), digitalWrite(medSpeed, HIGH), digitalWrite(highSpeed, LOW); break;
+          case 3: digitalWrite(lowSpeed, LOW), digitalWrite(medSpeed, LOW), digitalWrite(highSpeed, HIGH); break;
+          default: digitalWrite(lowSpeed, HIGH); digitalWrite(medSpeed, LOW); digitalWrite(highSpeed, LOW);
+            newModeCount = 0; break;
+        }
+        modeButtonCounter = newModeCount;
+      }
+    }
+
+    delay(300);
+  }
+}

@@ -55,28 +55,18 @@ void loop() {
     digitalWrite(lowSpeed, stateCompressorPin);
   }
 
-if(digitalRead(modeButton)==LOW)
-{
-newModeCount=modeButtonCounter+1;
+if(digitalRead(modeButton)==LOW)  //  Need to add something here to make sure the AC unit is on.
+{newModeCount=modeButtonCounter+1;
 if(newModeCount!=modeButtonCounter)
 {
 Serial.println(newModeCount);
 switch (newModeCount)
-{
-case 1: digitalWrite(lowSpeed,HIGH), digitalWrite(medSpeed,LOW), digitalWrite(highSpeed,LOW);
-break;
-case 2: digitalWrite(lowSpeed,LOW), digitalWrite(medSpeed,HIGH), digitalWrite(highSpeed,LOW);
-break;
-case 3: digitalWrite(lowSpeed,LOW), digitalWrite(medSpeed,LOW), digitalWrite(highSpeed,HIGH);
-break;
-default: digitalWrite(lowSpeed,HIGH);
-digitalWrite(medSpeed,LOW);
-digitalWrite(highSpeed,LOW);
-newModeCount=0;
-break;
-}
-modeButtonCounter=newModeCount;
-}
+{ case 1: digitalWrite(lowSpeed,HIGH), digitalWrite(medSpeed,LOW), digitalWrite(highSpeed,LOW); break;
+case 2: digitalWrite(lowSpeed,LOW), digitalWrite(medSpeed,HIGH), digitalWrite(highSpeed,LOW); break;
+case 3: digitalWrite(lowSpeed,LOW), digitalWrite(medSpeed,LOW), digitalWrite(highSpeed,HIGH); break;
+default: digitalWrite(lowSpeed,HIGH); digitalWrite(medSpeed,LOW); digitalWrite(highSpeed,LOW);
+newModeCount=0; break; }
+modeButtonCounter=newModeCount; }
 }
 delay(1000);
 }

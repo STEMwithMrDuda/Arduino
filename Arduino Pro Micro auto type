@@ -1,0 +1,17 @@
+#include <Keyboard.h>
+
+const int buttonPin = 2;  // Set button pin
+String text = "These are the words I want it to type.";  // Define your text
+
+void setup() {
+  pinMode(buttonPin, INPUT_PULLUP);  // Set pin as input with internal pull-up resistor
+  Keyboard.begin();
+}
+
+void loop() {
+  if (digitalRead(buttonPin) == LOW) {  // Button is pressed (active LOW)
+    delay(50);  // Debounce delay
+    Keyboard.print(text);  // Type the stored text
+    while (digitalRead(buttonPin) == LOW);  // Wait for button release
+  }
+}
